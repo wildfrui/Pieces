@@ -1,7 +1,7 @@
 import React from "react";
 
-const BookList = () => {
+const TweetList = () => {
   return <div>List</div>;
 };
 
-export default BookList;
+export default TweetList;
