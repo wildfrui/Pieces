@@ -1,8 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import BookList from "./components/BookList";
+import Profile from "./components/Profile";
 import Home from "./components/Home";
 import Header from "./components/Header";
+import "./css/null.css";
+import "./css/elements.css";
 
 const App = () => {
   return (
@@ -11,7 +13,7 @@ const App = () => {
         <Header></Header>
         <Routes>
           <Route path="/" exact element={<Home />}></Route>
-          <Route path="/books" exact element={<BookList />}></Route>
+          <Route path="/books" exact element={<Profile />}></Route>
         </Routes>
       </React.Fragment>
     </Router>
