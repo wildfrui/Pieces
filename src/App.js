@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import BookList from "./components/BookList";
 import Home from "./components/Home";
 import Header from "./components/Header";
+import "./css/null.css";
+import "./css/elements.css";
 
 const App = () => {
   return (
