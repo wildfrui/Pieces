@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Profile from "./components/Profile";
 import Home from "./components/Home";
 import Header from "./components/Header";
+import Register from "./components/Register";
 import "./css/null.css";
 import "./css/elements.css";
 
@@ -11,6 +12,7 @@ const App = () => {
     <Router>
       <React.Fragment>
         <Header></Header>
+        <Register lol="okay"></Register>
         <Routes>
           <Route path="/" exact element={<Home />}></Route>
           <Route path="/books" exact element={<Profile />}></Route>

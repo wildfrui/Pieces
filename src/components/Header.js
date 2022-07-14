@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Auth from "./Auth";
 import "./Header.css";
 
 const Header = () => {
@@ -23,6 +24,7 @@ const Header = () => {
             </li>
           </ul>
         </nav>
+        <Auth></Auth>
       </div>
     </header>
   );
