@@ -1,12 +1,11 @@
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
-import reducers from "./reducers";
+import store from "./store";
+import "./firebase";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
-const store = createStore(reducers);
 
 root.render(
   <Provider store={store}>

@@ -18,8 +18,8 @@ const Header = () => {
               </Link>
             </li>
             <li className="nav__item">
-              <Link to="/books" className="nav__link">
-                Books
+              <Link to="/tweets" className="nav__link">
+                Tweets
               </Link>
             </li>
           </ul>

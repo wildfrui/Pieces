@@ -1,61 +1,27 @@
-import { useRef, useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setUser } from "../store/slices.js/userSlice";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import Form from "./Form";
 
 const Login = () => {
-  const userRef = useRef();
-  const errRef = useRef();
+  // const errRef = useRef();
+  // const [errMsg, setErrMsg] = useState("");
+  const dispatch = useDispatch();
 
-  const [user, setUser] = useState("");
-  const [errMsg, setErrMsg] = useState("");
-  const [password, setPassword] = useState("");
-
-  useEffect(() => {
-    userRef.current.focus();
-  }, []);
-
-  useEffect(() => {});
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(user, password);
+  const handleLogin = () => {
+    const auth = getAuth();
+    signInWithWithEmail(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential);
+        const user = userCredential.user;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   };
 
-  return (
-    <section>
-      <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>
-        {errMsg}
-      </p>
-      <h1>Sign In</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          ref={userRef}
-          onChange={(e) => setUser(e.target.value)}
-          value={user}
-          autoComplete="off"
-          required
-        />
-        <label htmlFor="password">password:</label>
-        <input
-          type="password"
-          id="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          autoComplete="off"
-          required
-        />
-        <button>Sign In</button>
-      </form>
-      <p>
-        Need an account? <br />
-        <span>
-          {/* react router link */}
-          <a href="#">Sign Up</a>
-        </span>
-      </p>
-    </section>
-  );
+  return <Form title="sign in" handleSubmit={handleLogin}></Form>;
 };
 
 export default Login;

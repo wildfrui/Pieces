@@ -1,7 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Profile from "./components/Profile";
-import Home from "./components/Home";
+import { BrowserRouter as Router } from "react-router-dom";
+import AppRouter from "./components/AppRouter";
 import Header from "./components/Header";
 import Register from "./components/Register";
 import "./css/null.css";
@@ -12,11 +11,8 @@ const App = () => {
     <Router>
       <React.Fragment>
         <Header></Header>
-        <Register lol="okay"></Register>
-        <Routes>
-          <Route path="/" exact element={<Home />}></Route>
-          <Route path="/books" exact element={<Profile />}></Route>
-        </Routes>
+        <Register></Register>
+        <AppRouter></AppRouter>
       </React.Fragment>
     </Router>
   );

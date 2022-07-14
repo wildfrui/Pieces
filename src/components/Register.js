@@ -1,51 +1,40 @@
-import { useRef, useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { signIn } from "../actions";
+import { useDispatch } from "react-redux";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { setUser } from "../store/slices.js/userSlice";
+import Form from "./Form";
 
-const Register = (props) => {
-  const userRef = useRef();
+const Register = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [user, setUser] = useState("");
-  const [password, setPassword] = useState("");
-
-  useEffect(() => {
-    userRef.current.focus();
-  }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    props.signIn();
-    console.log(props);
+  const handleSignUp = (email, password) => {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => {
+        console.log(user);
+        dispatch(
+          setUser({
+            email: user.email,
+            id: user.uid,
+            token: user.accessToken,
+          })
+        );
+        navigate("/");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   };
 
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Enter a username:</label>
-        <input
-          type="text"
-          id="username"
-          ref={userRef}
-          onChange={(e) => {
-            setUser(e.target.value);
-          }}
-        />
-        <label htmlFor="password">Enter a password:</label>
-        <input
-          type="password"
-          id="password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <button>Submit</button>
-      </form>
-    </section>
+    <div>
+      <Form title="submit" handleSubmit={handleSignUp}>
+        {" "}
+      </Form>
+    </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return { isSignedIn: state.auth.isSignedIn };
-};
-
-export default connect(mapStateToProps, { signIn })(Register);
+export default Register;
